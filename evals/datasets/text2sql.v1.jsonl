@@ -1,0 +1,10 @@
+{"question":"哪個商品最貴？","product_slug":null,"expected_fragment":"ORDER BY current_price_twd_per_kg DESC"}
+{"question":"目前價格最高的五種農產品","product_slug":null,"expected_fragment":"v_latest_product_status"}
+{"question":"列出價格最貴的商品","product_slug":null,"expected_fragment":"LIMIT 5"}
+{"question":"哪個商品最便宜？","product_slug":null,"expected_fragment":"ORDER BY current_price_twd_per_kg ASC"}
+{"question":"列出價格最低的農產品","product_slug":null,"expected_fragment":"v_latest_product_status"}
+{"question":"目前成交量最大的商品","product_slug":null,"expected_fragment":"ORDER BY volume_kg DESC"}
+{"question":"哪個商品交易量最大？","product_slug":null,"expected_fragment":"volume_kg"}
+{"question":"成交量最多的農產品排行","product_slug":null,"expected_fragment":"LIMIT 5"}
+{"question":"哪個市場的高麗菜最貴？","product_slug":"cabbage","expected_fragment":"v_market_product_daily"}
+{"question":"比較各市場高麗菜價格","product_slug":"cabbage","expected_fragment":"product_slug = 'cabbage'"}

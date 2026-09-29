@@ -1,0 +1,9 @@
+{"id":"insufficient-history","history_day_count":119,"current":"200","ma_30d":"100","percentile_365d":"99","robust_z_365d":"5","expected":"insufficient_data"}
+{"id":"anomalously-high-boundary","history_day_count":120,"current":"200","ma_30d":"100","percentile_365d":"95","robust_z_365d":"2","expected":"anomalously_high"}
+{"id":"high-percentile-boundary","history_day_count":120,"current":"110","ma_30d":"100","percentile_365d":"75","robust_z_365d":"1","expected":"high"}
+{"id":"high-moving-average-boundary","history_day_count":120,"current":"115","ma_30d":"100","percentile_365d":"50","robust_z_365d":"1","expected":"high"}
+{"id":"low-percentile-boundary","history_day_count":120,"current":"90","ma_30d":"100","percentile_365d":"25","robust_z_365d":"-1","expected":"low"}
+{"id":"low-moving-average-boundary","history_day_count":120,"current":"85","ma_30d":"100","percentile_365d":"50","robust_z_365d":"-1","expected":"low"}
+{"id":"high-precedes-low","history_day_count":120,"current":"115","ma_30d":"100","percentile_365d":"75","robust_z_365d":"1","expected":"high"}
+{"id":"high-precedence-conflict","history_day_count":120,"current":"80","ma_30d":"100","percentile_365d":"90","robust_z_365d":"1","expected":"high"}
+{"id":"ordinary-band","history_day_count":365,"current":"105","ma_30d":"100","percentile_365d":"50","robust_z_365d":"0.5","expected":"normal"}

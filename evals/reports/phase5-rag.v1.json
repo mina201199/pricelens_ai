@@ -1,0 +1,63 @@
+{
+  "evaluation": "phase5-official-rag-v1",
+  "evaluated_at": "2026-09-28T17:27:02.437386+00:00",
+  "provider": "local-character-ngram",
+  "model": "char-ngram-hash-v1",
+  "prompt_version": "extractive-template-v1",
+  "embedding_version": "char-ngram-256-v1",
+  "dataset": "rag.v1.jsonl",
+  "dataset_revision": "rag.v1",
+  "metrics": {
+    "recall_at_5": 1.0,
+    "mrr": 1.0,
+    "citation_domain_correctness": 1.0,
+    "abstention_accuracy": 1.0
+  },
+  "counts": {
+    "queries": 3,
+    "documents": 9
+  },
+  "latency_ms": 1.389,
+  "runtime": {
+    "python": "3.12.14",
+    "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.41",
+    "hardware": {
+      "architecture": "x86_64",
+      "processor": "not exposed inside the container"
+    }
+  },
+  "details": [
+    {
+      "id": "cabbage-reason-2026-09",
+      "expected_relevant_ids": [
+        "cabbage-supply"
+      ],
+      "retrieved_ids": [
+        "cabbage-supply"
+      ],
+      "abstained": false
+    },
+    {
+      "id": "cherry-tomato-reason-2026-09",
+      "expected_relevant_ids": [
+        "cherry-tomato-supply"
+      ],
+      "retrieved_ids": [
+        "cherry-tomato-supply"
+      ],
+      "abstained": false
+    },
+    {
+      "id": "onion-abstention-2026-09",
+      "expected_relevant_ids": [],
+      "retrieved_ids": [],
+      "abstained": true
+    }
+  ],
+  "notes": [
+    "Sanitized synthetic query-document fixtures; not a live coverage claim.",
+    "Character n-gram embeddings are lexical and are not semantic embeddings.",
+    "Citation checks verify an official host; answers are extractive chunks.",
+    "Prompt-injection text is untrusted evidence, never an instruction."
+  ]
+}

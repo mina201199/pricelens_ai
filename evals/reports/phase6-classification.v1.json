@@ -1,0 +1,69 @@
+{
+  "evaluation": "phase6-classification-review-v1",
+  "evaluated_at": "2026-09-28T17:40:51.071007+00:00",
+  "provider": "deterministic-rule-engine",
+  "model": "price-classification-v1",
+  "prompt_version": "none",
+  "dataset": "classification.v1.jsonl",
+  "dataset_revision": "classification.v1",
+  "metrics": {
+    "boundary_accuracy": 1.0
+  },
+  "counts": {
+    "cases": 9
+  },
+  "runtime": {
+    "python": "3.12.14",
+    "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.41"
+  },
+  "details": [
+    {
+      "id": "insufficient-history",
+      "expected": "insufficient_data",
+      "actual": "insufficient_data"
+    },
+    {
+      "id": "anomalously-high-boundary",
+      "expected": "anomalously_high",
+      "actual": "anomalously_high"
+    },
+    {
+      "id": "high-percentile-boundary",
+      "expected": "high",
+      "actual": "high"
+    },
+    {
+      "id": "high-moving-average-boundary",
+      "expected": "high",
+      "actual": "high"
+    },
+    {
+      "id": "low-percentile-boundary",
+      "expected": "low",
+      "actual": "low"
+    },
+    {
+      "id": "low-moving-average-boundary",
+      "expected": "low",
+      "actual": "low"
+    },
+    {
+      "id": "high-precedes-low",
+      "expected": "high",
+      "actual": "high"
+    },
+    {
+      "id": "high-precedence-conflict",
+      "expected": "high",
+      "actual": "high"
+    },
+    {
+      "id": "ordinary-band",
+      "expected": "normal",
+      "actual": "normal"
+    }
+  ],
+  "notes": [
+    "Boundary review fixtures are synthetic; expert agreement is not measured."
+  ]
+}

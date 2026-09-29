@@ -1,0 +1,130 @@
+{
+  "version": "v1",
+  "source": "moa_farm_trans_v1",
+  "families": [
+    {
+      "canonical_name": "甘藍",
+      "slug": "cabbage",
+      "display_name": "高麗菜（甘藍）",
+      "category": "vegetable",
+      "default_include_imported": false,
+      "aliases": ["甘藍", "高麗菜"],
+      "source_mappings": [
+        {"codes": ["LA1", "LA11", "LA12"], "expected_names": ["甘藍-初秋"], "variety": "初秋", "origin_type": "domestic", "analytics_included": true},
+        {"codes": ["LA2", "LA21", "LA22"], "expected_names": ["甘藍-改良種"], "variety": "改良種", "origin_type": "domestic", "analytics_included": true},
+        {"codes": ["LA3", "LA31", "LA32"], "expected_names": ["甘藍-甜甘藍"], "variety": "甜甘藍", "origin_type": "domestic", "analytics_included": true},
+        {"codes": ["LA7"], "expected_names": ["甘藍-改良尖"], "variety": "改良尖", "origin_type": "domestic", "analytics_included": true},
+        {"codes": ["LA0"], "expected_names": ["甘藍-其他"], "variety": "其他", "origin_type": "domestic", "analytics_included": false},
+        {"codes": ["LA4", "LA41", "LA42"], "expected_names": ["甘藍-紫色"], "variety": "紫色", "origin_type": "domestic", "analytics_included": false},
+        {"codes": ["LA5", "LA51"], "expected_names": ["甘藍-甘藍心"], "variety": "甘藍心", "origin_type": "domestic", "analytics_included": false},
+        {"codes": ["LA6", "LA61"], "expected_names": ["甘藍-甘藍芽"], "variety": "甘藍芽", "origin_type": "domestic", "analytics_included": false},
+        {"codes": ["LA9"], "expected_names": ["甘藍-進口"], "variety": "進口", "origin_type": "imported", "analytics_included": false},
+        {"codes": ["LA90"], "expected_names": ["甘藍-進口 其他"], "variety": "進口其他", "origin_type": "imported", "analytics_included": false},
+        {"codes": ["LA91"], "expected_names": ["甘藍-進口 初秋"], "variety": "進口初秋", "origin_type": "imported", "analytics_included": false},
+        {"codes": ["LA92"], "expected_names": ["甘藍-進口 改良種"], "variety": "進口改良種", "origin_type": "imported", "analytics_included": false},
+        {"codes": ["LA93"], "expected_names": ["甘藍-進口 甜甘藍", "甘藍-進口 甜甘藍 "], "variety": "進口甜甘藍", "origin_type": "imported", "analytics_included": false},
+        {"codes": ["LA94"], "expected_names": ["甘藍-進口 紫色"], "variety": "進口紫色", "origin_type": "imported", "analytics_included": false},
+        {"codes": ["LA95"], "expected_names": ["甘藍-進口 甘藍心", "甘藍-進口 甘藍心 "], "variety": "進口甘藍心", "origin_type": "imported", "analytics_included": false},
+        {"codes": ["LA96"], "expected_names": ["甘藍-進口 甘藍芽"], "variety": "進口甘藍芽", "origin_type": "imported", "analytics_included": false},
+        {"codes": ["LA97"], "expected_names": ["甘藍-進口 改良尖"], "variety": "進口改良尖", "origin_type": "imported", "analytics_included": false}
+      ]
+    },
+    {
+      "canonical_name": "球莖甘藍",
+      "slug": "kohlrabi",
+      "display_name": "球莖甘藍",
+      "category": "vegetable",
+      "default_include_imported": false,
+      "aliases": ["球莖甘藍", "大頭菜"],
+      "source_mappings": [
+        {"codes": ["SW1"], "expected_names": ["球莖甘藍"], "variety": null, "origin_type": "domestic", "analytics_included": true}
+      ]
+    },
+    {
+      "canonical_name": "包心白菜",
+      "slug": "napa-cabbage",
+      "display_name": "白菜（包心白）",
+      "category": "vegetable",
+      "default_include_imported": false,
+      "aliases": ["白菜", "大白菜", "包心白菜", "包心白"],
+      "source_mappings": [
+        {"codes": ["LC0"], "expected_names": ["包心白-其他"], "variety": "其他", "origin_type": "domestic", "analytics_included": false},
+        {"codes": ["LC1", "LC11", "LC12"], "expected_names": ["包心白-包白"], "variety": "包白", "origin_type": "domestic", "analytics_included": true},
+        {"codes": ["LC2", "LC21", "LC22"], "expected_names": ["包心白-成功白"], "variety": "成功白", "origin_type": "domestic", "analytics_included": true},
+        {"codes": ["LC3", "LC31", "LC32"], "expected_names": ["包心白-包頭蓮"], "variety": "包頭蓮", "origin_type": "domestic", "analytics_included": true},
+        {"codes": ["LC5", "LC51", "LC52"], "expected_names": ["包心白-天津白"], "variety": "天津白", "origin_type": "domestic", "analytics_included": true},
+        {"codes": ["LC6", "LC61"], "expected_names": ["包心白-冬白芽"], "variety": "冬白芽", "origin_type": "domestic", "analytics_included": true},
+        {"codes": ["LC7"], "expected_names": ["包心白-大土"], "variety": "大土", "origin_type": "domestic", "analytics_included": true},
+        {"codes": ["LC9"], "expected_names": ["包心白-進口"], "variety": "進口", "origin_type": "imported", "analytics_included": false},
+        {"codes": ["LC90", "LC91", "LC93", "LC95"], "expected_names": ["包心白菜-進口 其他", "包心白菜-進口 包白", "包心白菜-進口 包頭蓮", "包心白菜-進口 包頭蓮 ", "包心白菜-進口 天津白"], "variety": "進口", "origin_type": "imported", "analytics_included": false}
+      ]
+    },
+    {
+      "canonical_name": "番茄",
+      "slug": "tomato",
+      "display_name": "番茄",
+      "category": "vegetable",
+      "default_include_imported": false,
+      "aliases": ["番茄", "大番茄", "牛番茄"],
+      "source_mappings": [
+        {"codes": ["FJ0"], "expected_names": ["番茄-其他"], "variety": "其他", "origin_type": "domestic", "analytics_included": false},
+        {"codes": ["FJ1"], "expected_names": ["番茄-黑柿"], "variety": "黑柿", "origin_type": "domestic", "analytics_included": true},
+        {"codes": ["FJ2"], "expected_names": ["番茄-粉柿"], "variety": "粉柿", "origin_type": "domestic", "analytics_included": true},
+        {"codes": ["FJ3"], "expected_names": ["番茄-牛番茄"], "variety": "牛番茄", "origin_type": "domestic", "analytics_included": true}
+      ]
+    },
+    {
+      "canonical_name": "小番茄",
+      "slug": "cherry-tomato",
+      "display_name": "小番茄",
+      "category": "fruit",
+      "default_include_imported": false,
+      "aliases": ["小番茄", "聖女番茄", "玉女番茄"],
+      "source_mappings": [
+        {"codes": ["70", "71", "72", "73", "74"], "expected_names": ["小番茄-其他", "小番茄-ㄧ般", "小番茄-聖女", "小番茄-嬌女", "小番茄-玉女"], "variety": null, "origin_type": "domestic", "analytics_included": true}
+      ]
+    },
+    {
+      "canonical_name": "洋蔥",
+      "slug": "onion",
+      "display_name": "洋蔥",
+      "category": "vegetable",
+      "default_include_imported": false,
+      "aliases": ["洋蔥", "本產洋蔥"],
+      "source_mappings": [
+        {"codes": ["SD1"], "expected_names": ["洋蔥-本產"], "variety": "本產", "origin_type": "domestic", "analytics_included": true},
+        {"codes": ["SD9"], "expected_names": ["洋蔥-進口"], "variety": "進口", "origin_type": "imported", "analytics_included": false}
+      ]
+    },
+    {
+      "canonical_name": "香蕉",
+      "slug": "banana",
+      "display_name": "香蕉",
+      "category": "fruit",
+      "default_include_imported": false,
+      "aliases": ["香蕉"],
+      "source_mappings": [
+        {"codes": ["A0"], "expected_names": ["香蕉-其他"], "variety": "其他", "origin_type": "domestic", "analytics_included": false},
+        {"codes": ["A1"], "expected_names": ["香蕉"], "variety": null, "origin_type": "domestic", "analytics_included": true},
+        {"codes": ["A2"], "expected_names": ["香蕉-芭蕉紅芭蕉"], "variety": "芭蕉紅芭蕉", "origin_type": "domestic", "analytics_included": false},
+        {"codes": ["A3"], "expected_names": ["香蕉-旦蕉"], "variety": "旦蕉", "origin_type": "domestic", "analytics_included": false},
+        {"codes": ["A4"], "expected_names": ["香蕉-越旦"], "variety": "越旦", "origin_type": "domestic", "analytics_included": false}
+      ]
+    },
+    {
+      "canonical_name": "木瓜",
+      "slug": "papaya",
+      "display_name": "木瓜",
+      "category": "fruit",
+      "default_include_imported": false,
+      "aliases": ["木瓜", "紅肉木瓜"],
+      "source_mappings": [
+        {"codes": ["I0"], "expected_names": ["木瓜-其他"], "variety": "其他", "origin_type": "domestic", "analytics_included": false},
+        {"codes": ["I1"], "expected_names": ["木瓜-網室紅肉"], "variety": "網室紅肉", "origin_type": "domestic", "analytics_included": true},
+        {"codes": ["I2"], "expected_names": ["木瓜-一般紅肉"], "variety": "一般紅肉", "origin_type": "domestic", "analytics_included": true},
+        {"codes": ["I3"], "expected_names": ["木瓜-日昇種"], "variety": "日昇種", "origin_type": "domestic", "analytics_included": true},
+        {"codes": ["I4"], "expected_names": ["木瓜-青木瓜"], "variety": "青木瓜", "origin_type": "domestic", "analytics_included": false}
+      ]
+    }
+  ]
+}

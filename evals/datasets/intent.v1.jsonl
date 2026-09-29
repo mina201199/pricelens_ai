@@ -1,0 +1,14 @@
+{"question":"高麗菜現在算貴嗎？","product_slug":"cabbage","expected_intent":"product_status","expected_route":"typed_analytics"}
+{"question":"甘藍今天多少錢？","product_slug":"cabbage","expected_intent":"product_status","expected_route":"typed_analytics"}
+{"question":"番茄最近漲多少？","product_slug":"tomato","expected_intent":"product_change","expected_route":"typed_analytics"}
+{"question":"香蕉本週跌了嗎？","product_slug":"banana","expected_intent":"product_change","expected_route":"typed_analytics"}
+{"question":"木瓜為什麼變貴？","product_slug":"papaya","expected_intent":"price_reason","expected_route":"typed_analytics"}
+{"question":"洋蔥上漲的原因？","product_slug":"onion","expected_intent":"price_reason","expected_route":"typed_analytics"}
+{"question":"哪些菜本週變便宜？","product_slug":null,"expected_intent":"movers_down","expected_route":"typed_analytics"}
+{"question":"最近哪些商品下跌最多？","product_slug":null,"expected_intent":"movers_down","expected_route":"typed_analytics"}
+{"question":"哪些商品最近漲最多？","product_slug":null,"expected_intent":"movers_up","expected_route":"typed_analytics"}
+{"question":"本週價格上升排行","product_slug":null,"expected_intent":"movers_up","expected_route":"typed_analytics"}
+{"question":"哪個商品最貴？","product_slug":null,"expected_intent":"exploratory","expected_route":"text2sql"}
+{"question":"目前成交量最大的商品","product_slug":null,"expected_intent":"exploratory","expected_route":"text2sql"}
+{"question":"哪個市場的高麗菜最貴？","product_slug":"cabbage","expected_intent":"exploratory","expected_route":"text2sql"}
+{"question":"明天會下雨嗎？","product_slug":null,"expected_intent":"exploratory","expected_route":"text2sql"}

@@ -1,0 +1,41 @@
+{
+  "evaluation": "phase6-release-smoke-v1",
+  "evaluated_at": "2026-09-28T17:40:54.233215+00:00",
+  "provider": "deterministic-rules-and-local-ngram",
+  "model": "price-lens-rules-v1 / char-ngram-hash-v1",
+  "prompt_version": "ask-contract-v1 / extractive-template-v1",
+  "dataset_revision": "phase4-controlled-ai-v1 + rag.v1",
+  "runtime": {
+    "python": "3.12.14",
+    "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.41",
+    "hardware": "x86_64"
+  },
+  "cost": {
+    "external_model_calls": 0,
+    "currency_cost": "not applicable"
+  },
+  "checks": {
+    "api_health": {
+      "requests": 10,
+      "failures": 0,
+      "p50_ms": 11.19,
+      "p95_ms": 1122.43
+    },
+    "api_radar": {
+      "requests": 10,
+      "failures": 0,
+      "p50_ms": 16.04,
+      "p95_ms": 530.55
+    },
+    "frontend_home": {
+      "requests": 10,
+      "failures": 0,
+      "p50_ms": 131.26,
+      "p95_ms": 636.46
+    }
+  },
+  "freshness": {
+    "latest_trade_date": "2026-09-24",
+    "calendar_day_lag": 4
+  }
+}

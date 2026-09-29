@@ -1,0 +1,36 @@
+{
+  "evaluation": "phase4-controlled-ai-v1",
+  "evaluated_at": "2026-09-28T13:34:04.361689+00:00",
+  "provider": "rules",
+  "model": "price-lens-rules-v1",
+  "prompt_version": "text2sql-rules-v1",
+  "datasets": {
+    "normalization": "normalization.v1.jsonl",
+    "intent": "intent.v1.jsonl",
+    "text2sql": "text2sql.v1.jsonl",
+    "adversarial": "text2sql-adversarial.v1.jsonl"
+  },
+  "metrics": {
+    "normalization_accuracy": 1.0,
+    "intent_route_accuracy": 1.0,
+    "text2sql_validation_accuracy": 1.0,
+    "text2sql_execution_accuracy": 1.0,
+    "adversarial_block_rate": 1.0
+  },
+  "counts": {
+    "normalization": 18,
+    "intent": 14,
+    "text2sql": 10,
+    "adversarial": 20
+  },
+  "latency_ms": 1598.55,
+  "runtime": {
+    "python": "3.12.14",
+    "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.41"
+  },
+  "notes": [
+    "Execution accuracy means the generated query passed validation, executed through the dedicated read-only role, and returned a non-empty result on the documented snapshot.",
+    "This is a small MVP evaluation set and must not be generalized to unrestricted natural-language SQL accuracy.",
+    "The rules provider is the reproducible default baseline; no hosted LLM was used for this report."
+  ]
+}

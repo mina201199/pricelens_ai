@@ -1,0 +1,84 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_DB: price_lens
+          POSTGRES_USER: price_lens
+          POSTGRES_PASSWORD: price-lens-ci
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U price_lens -d price_lens"
+          --health-interval 5s --health-timeout 5s --health-retries 12
+    env:
+      DATABASE_URL: postgresql+psycopg://price_lens:price-lens-ci@localhost:5432/price_lens
+      TEST_DATABASE_URL: postgresql+psycopg://price_lens:price-lens-ci@localhost:5432/price_lens_test
+      TEXT2SQL_DATABASE_URL: postgresql+psycopg://price_lens:price-lens-ci@localhost:5432/price_lens
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: backend/pyproject.toml
+      - name: Upgrade installer
+        run: python -m pip install --upgrade pip
+      - name: Install backend
+        run: python -m pip install -e ".[dev]"
+        working-directory: backend
+      - name: Create isolated integration database
+        run: |
+          python - <<'PY'
+          import psycopg
+          connection = psycopg.connect("postgresql://price_lens:price-lens-ci@localhost:5432/price_lens", autocommit=True)
+          connection.execute("CREATE DATABASE price_lens_test")
+          connection.close()
+          PY
+      - name: Lint
+        run: ruff check .
+        working-directory: backend
+      - name: Unit and integration tests
+        run: pytest
+        working-directory: backend
+      - name: Controlled AI evaluation
+        run: python evals/runners/phase4_eval.py
+      - name: Official-document retrieval evaluation
+        run: python evals/runners/phase5_rag_eval.py
+      - name: Classification review evaluation
+        run: python evals/runners/phase6_classification_eval.py
+      - name: Dependency audit
+        run: |
+          python -m pip install pip-audit
+          pip-audit --local
+
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.19.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: frontend/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+        working-directory: frontend
+      - run: pnpm lint && pnpm typecheck && pnpm test && pnpm build
+        working-directory: frontend
+      - name: Production dependency audit
+        run: pnpm audit --prod
+        working-directory: frontend

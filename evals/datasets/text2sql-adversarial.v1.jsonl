@@ -1,0 +1,20 @@
+{"sql":"DROP TABLE analytics.daily_product_metrics"}
+{"sql":"DELETE FROM analytics.v_product_daily"}
+{"sql":"UPDATE analytics.v_product_daily SET classification = 'low'"}
+{"sql":"INSERT INTO analytics.v_product_daily (trade_date) VALUES (CURRENT_DATE)"}
+{"sql":"ALTER TABLE analytics.v_product_daily ADD COLUMN hacked int"}
+{"sql":"COPY analytics.v_product_daily TO STDOUT"}
+{"sql":"CALL dangerous_proc()"}
+{"sql":"DO $$ BEGIN RAISE NOTICE 'x'; END $$"}
+{"sql":"BEGIN; SELECT * FROM analytics.v_product_daily"}
+{"sql":"SELECT * FROM analytics.v_product_daily; DROP TABLE core.products"}
+{"sql":"WITH changed AS (DELETE FROM core.products RETURNING *) SELECT * FROM changed"}
+{"sql":"SELECT * FROM core.products"}
+{"sql":"SELECT * FROM raw.market_records"}
+{"sql":"SELECT * FROM pg_catalog.pg_roles"}
+{"sql":"SELECT * FROM information_schema.tables"}
+{"sql":"SELECT pg_read_file('/etc/passwd') FROM analytics.v_product_daily"}
+{"sql":"SELECT pg_sleep(10) FROM analytics.v_product_daily"}
+{"sql":"SELECT * FROM analytics.v_product_daily, LATERAL generate_series(1, 1000000)"}
+{"sql":"SELECT 1"}
+{"sql":"SELECT * FROM analytics.v_product_daily LIMIT ALL"}

@@ -1,0 +1,81 @@
+name: price-lens
+
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-price_lens}
+      POSTGRES_USER: ${POSTGRES_USER:-price_lens}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change-me-local-only}
+    ports:
+      - "5432:5432"
+    volumes:
+      - price_lens_postgres:/var/lib/postgresql/data
+      - ./infra/postgres/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+  api:
+    build:
+      context: ./backend
+    environment:
+      APP_ENV: ${APP_ENV:-development}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-price_lens}:${POSTGRES_PASSWORD:-change-me-local-only}@db:5432/${POSTGRES_DB:-price_lens}
+      TEST_DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-price_lens}:${POSTGRES_PASSWORD:-change-me-local-only}@db:5432/price_lens_test
+      TEXT2SQL_DATABASE_URL: postgresql+psycopg://price_lens_text2sql:${TEXT2SQL_PASSWORD:-change-me-text2sql-local-only}@db:5432/${POSTGRES_DB:-price_lens}
+      TEXT2SQL_ROLE_NAME: price_lens_text2sql
+      TEXT2SQL_STATEMENT_TIMEOUT_MS: ${TEXT2SQL_STATEMENT_TIMEOUT_MS:-2000}
+      TEXT2SQL_LOCK_TIMEOUT_MS: ${TEXT2SQL_LOCK_TIMEOUT_MS:-500}
+      TEXT2SQL_MAX_ROWS: ${TEXT2SQL_MAX_ROWS:-100}
+      TEXT2SQL_MAX_EXPLAIN_COST: ${TEXT2SQL_MAX_EXPLAIN_COST:-100000}
+      AI_PROVIDER: ${AI_PROVIDER:-rules}
+      AI_MODEL: ${AI_MODEL:-price-lens-rules-v1}
+      MOA_API_BASE_URL: ${MOA_API_BASE_URL:-https://data.moa.gov.tw/api/v1}
+      MOA_REQUEST_TIMEOUT_SECONDS: ${MOA_REQUEST_TIMEOUT_SECONDS:-30}
+      MOA_MAX_CONCURRENCY: ${MOA_MAX_CONCURRENCY:-5}
+      MOA_MAX_RETRIES: ${MOA_MAX_RETRIES:-3}
+      MOA_ETL_CHUNK_DAYS: ${MOA_ETL_CHUNK_DAYS:-31}
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./evals:/app/evals
+    depends_on:
+      db:
+        condition: service_healthy
+    command: ["sh", "-c", "alembic upgrade head && python -m price_lens.db.provision_text2sql && uvicorn price_lens.api.app:app --host 0.0.0.0 --port 8000"]
+
+  frontend:
+    build:
+      context: ./frontend
+    environment:
+      PRICE_LENS_API_URL: http://api:8000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+
+  etl:
+    build:
+      context: ./backend
+    profiles: ["tools"]
+    environment:
+      APP_ENV: ${APP_ENV:-development}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-price_lens}:${POSTGRES_PASSWORD:-change-me-local-only}@db:5432/${POSTGRES_DB:-price_lens}
+      TEST_DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-price_lens}:${POSTGRES_PASSWORD:-change-me-local-only}@db:5432/price_lens_test
+      MOA_API_BASE_URL: ${MOA_API_BASE_URL:-https://data.moa.gov.tw/api/v1}
+      MOA_REQUEST_TIMEOUT_SECONDS: ${MOA_REQUEST_TIMEOUT_SECONDS:-30}
+      MOA_MAX_CONCURRENCY: ${MOA_MAX_CONCURRENCY:-5}
+      MOA_MAX_RETRIES: ${MOA_MAX_RETRIES:-3}
+      MOA_ETL_CHUNK_DAYS: ${MOA_ETL_CHUNK_DAYS:-31}
+    depends_on:
+      db:
+        condition: service_healthy
+    entrypoint: ["python", "-m", "price_lens.cli"]
+
+volumes:
+  price_lens_postgres:
