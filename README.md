@@ -2,6 +2,8 @@
 
 > 將台灣官方農產品批發市場交易資料，轉成可追溯、可解釋的價格訊號。
 
+**目前的 AI Search 是規則 baseline，尚未接 LLM。** 意圖判斷用關鍵字規則，Text2SQL 用規則模板產生 SQL，官方文件檢索用字元 n-gram hashing 向量；整個系統沒有呼叫 LLM、外部 embedding 或任何學習式模型。SQL 生成透過 provider 介面隔開，架構上可以換成 LLM provider，而 SQL 驗證與唯讀執行限制不變。各元件與對應檔案見 [AI Search 實作現況](#ai-search-實作現況)。
+
 ## 專案狀態
 
 **Phase 6 release hardening 已完成首輪驗收。** 系統包含可執行的 Next.js 產品前端、PostgreSQL/pgvector、FastAPI、官方資料 ETL、deterministic price analytics、typed intent routing、安全 Text2SQL，以及官方文件 RAG。首頁 AI Search 會先回答批發價格事實，再以符合商品與日期的農業部官方文件列出有引用的可能背景；無文件時明確 abstain。
@@ -9,6 +11,19 @@
 官方文件問答採本地可重現的字元 n-gram 向量檢索，不呼叫外部 embedding 或生成模型。文件內容視為不可信資料，引用只表達可能相關背景，不代表已證實因果。Agent orchestration 與 LoRA 不屬於 Phase 5。
 
 Phase 6 新增 CI、凍結的分類邊界 review set、request-id JSON logs、release latency/freshness smoke 報告與一鍵 demo 啟動。LoRA 不進 production：目前凍結的 normalization/intent MVP set 已達滿分，尚無錯誤切片可證明微調能帶來可測提升。
+
+### AI Search 實作現況
+
+「AI Search」目前是可重現的規則 baseline，不是 LLM 應用：
+
+| 元件 | 目前實作 | 檔案 |
+|---|---|---|
+| 意圖路由 | 關鍵字規則（例如「為什麼」、「漲／跌」、「排行」），決定走 typed analytics 工具或 Text2SQL | `backend/src/price_lens/ai/router.py` |
+| Text2SQL | `RulesSqlProvider`（`price-lens-rules-v1`）以規則模板產生 SQL；設定 `AI_PROVIDER` 預設為 `rules` | `backend/src/price_lens/ai/providers.py` |
+| SQL 安全層 | sqlglot AST 驗證、只允許 `analytics` 的 allowlisted views、禁用函式、強制 LIMIT；執行時使用唯讀 transaction、statement timeout、EXPLAIN 成本門檻與專用唯讀 DB 角色 | `backend/src/price_lens/ai/text2sql/validator.py`、`backend/src/price_lens/ai/text2sql/executor.py` |
+| 官方文件檢索（RAG） | 1–3 字元 n-gram 以 feature hashing 轉成 256 維向量，存在 pgvector（HNSW、cosine）；沒有生成模型，只列出引用文件 | `backend/src/price_lens/rag/documents.py`、`backend/migrations/versions/0004_phase5_official_rag.py` |
+
+Provider 可替換的範圍：`AskService`（`backend/src/price_lens/ai/service.py`）以建構參數注入 SQL provider，介面是 `SqlGenerationProvider.generate_sql()`。目前唯一的實作是 `RulesSqlProvider`；`AI_PROVIDER` 設定已預留，但程式還沒有依它切換 provider。日後接上 LLM provider 時，產生的 SQL 仍要通過同一套驗證與執行限制。
 
 ## 資料語意
 
