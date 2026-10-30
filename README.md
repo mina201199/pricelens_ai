@@ -247,3 +247,7 @@ docs/                             # architecture, source assessment, review
 Phase 5 已加入官方文件匯入、pgvector metadata filtering、時間與商品限定檢索、逐條 citation UI，以及無文件 abstention。SQL／Python 計算價格數字；文件提供的只是可能背景，不能單獨當作價格因果證明。
 
 CI 定義於 `.github/workflows/ci.yml`。本機可執行 `make ci`，再於服務啟動時執行 `make demo-eval` 產生 `evals/reports/phase6-release-smoke.v1.json`。分類 review 使用 `classification.v1.jsonl`，報告輸出至 `evals/reports/phase6-classification.v1.json`。所有評估均標示資料集版本；小型合成集分數不可外推為生產準確率。完整 gate、已知風險與檢查快照見 [Phase 6 Review](docs/phase-6-review.md)。
+
+## 授權
+
+本專案的程式碼與文件以 [MIT License](LICENSE) 授權。農業部「農產品交易行情」等官方資料不在 MIT 授權範圍內，依政府資料開放授權條款－第 1 版使用；系統匯入時也會在 `core.data_sources` 記錄這項授權。
