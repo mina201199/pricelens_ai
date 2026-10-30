@@ -339,7 +339,6 @@ POST /api/v1/ask
 
 ```text
 price-lens/
-├─ AGENTS.md
 ├─ README.md
 ├─ .env.example
 ├─ .gitignore
